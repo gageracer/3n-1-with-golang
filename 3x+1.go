@@ -22,7 +22,7 @@ func main() {
 			showResults = false
 		} else {
 			startArg, _ = strconv.Atoi(args[0])
-			startArg = min(startArg, 1)
+			startArg = min(startArg, 0)
 			endArg = startArg * 2
 		}
 	}
@@ -73,5 +73,5 @@ func min(a, b int) int {
 	if a > b {
 		return a
 	}
-	return b
+	return b + 1
 }
