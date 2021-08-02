@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	startArg, endArg := 1, 5
+	var startArg, endArg uint64 = 1, 5
 	showResults := true
 	matrix := false
 	args := os.Args[1:]
@@ -21,7 +21,7 @@ func main() {
 			matrix = true
 			showResults = false
 		} else {
-			startArg, _ = strconv.Atoi(args[0])
+			startArg, _ = strconv.ParseUint(args[0], 10, 64)
 			startArg = min(startArg, 0)
 			endArg = startArg * 2
 		}
@@ -33,7 +33,7 @@ func main() {
 			matrix = true
 			showResults = false
 		} else {
-			endArg, _ = strconv.Atoi(args[1])
+			endArg, _ = strconv.ParseUint(args[1], 10, 64)
 			endArg = min(endArg, startArg)
 		}
 	}
@@ -57,19 +57,19 @@ func main() {
 				num = (3 * num) + 1
 			}
 			if matrix {
-				fmt.Print(round, num)
+				fmt.Print(round, ":", num, "|")
 			}
 		}
 		if showResults {
 			fmt.Printf("%v took %v rounds to reach the loop.\n",
 				start, round)
-			fmt.Println("------------------------------------")
+			fmt.Println("----------------------------------------")
 		}
 	}
-	fmt.Printf("Last number is %v.\n", startArg)
+	fmt.Printf("\nLast number is %v.\n", startArg)
 }
 
-func min(a, b int) int {
+func min(a, b uint64) uint64 {
 	if a > b {
 		return a
 	}
