@@ -22,4 +22,4 @@ jobs:
       run: go build -v ./3x+1.go
 
     - name: Test
-      run: go test -v ./...
+      run: go test -v ./3x+1.go
