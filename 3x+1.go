@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"math/big"
 	"os"
 	"strconv"
 )
 
 func main() {
 
-	var startArg, endArg uint64 = 1, 5
+	startArg, endArg := big.NewInt(1), big.NewInt(5)
 	showResults := true
 	matrix := false
 	args := os.Args[1:]
@@ -21,9 +22,10 @@ func main() {
 			matrix = true
 			showResults = false
 		} else {
-			startArg, _ = strconv.ParseUint(args[0], 10, 64)
-			startArg = min(startArg, 0)
-			endArg = startArg * 2
+			tmp, _ := strconv.ParseInt(args[0], 10, 64)
+			startArg = big.NewInt(tmp)
+			startArg = min(startArg, big.NewInt(0))
+			endArg.Mul(startArg, big.NewInt(2))
 		}
 	}
 	if len(args) > 1 {
@@ -33,7 +35,8 @@ func main() {
 			matrix = true
 			showResults = false
 		} else {
-			endArg, _ = strconv.ParseUint(args[1], 10, 64)
+			tmp, _ := strconv.ParseInt(args[1], 10, 64)
+			endArg = big.NewInt(tmp)
 			endArg = min(endArg, startArg)
 		}
 	}
@@ -47,14 +50,16 @@ func main() {
 		// fmt.Println(showResults)
 	}
 
-	for start := startArg; start <= endArg; start++ {
+	for start := startArg; start.Cmp(endArg) < 0; start.Add(start, big.NewInt(1)) {
 		round := 1
-
-		for num := start; num != 1; round++ {
-			if num%2 == 0 {
-				num = num / 2
+		num := big.NewInt(0)
+		a := big.NewInt(9)
+		for num.Add(start, num); num.Cmp(big.NewInt(1)) != 0; round++ {
+			if a.Mod(num, big.NewInt(2)); a.Cmp(big.NewInt(0)) == 0 {
+				num.Div(num, big.NewInt(2))
 			} else {
-				num = (3 * num) + 1
+				num.Mul(num, big.NewInt(3))
+				num.Add(num, big.NewInt(1))
 			}
 			if matrix {
 				fmt.Print(round, ":", num, "|")
@@ -69,9 +74,10 @@ func main() {
 	fmt.Printf("\nLast number is %v.\n", startArg)
 }
 
-func min(a, b uint64) uint64 {
-	if a > b {
+func min(a, b *big.Int) *big.Int {
+	if a.Cmp(b) == 1 {
 		return a
 	}
-	return b + 1
+	result := big.NewInt(0)
+	return result.Add(b, big.NewInt(1))
 }
