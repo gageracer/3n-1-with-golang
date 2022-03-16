@@ -60,7 +60,7 @@ Loop:
 		if side == face {
 			tossed++
 			if tossed > howMany/2 {
-				fmt.Println("\033[H\033[2J")
+				fmt.Print("\033[H\033[2J")
 				fmt.Print(tossed)
 			}
 			if tossed == howMany {
