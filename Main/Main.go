@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"reflect"
 )
+
 // Enumerated Constant
 const (
 	_ = iota // 0
 	interface2
 	interface3
 )
+
 // Struct
-type Person struct{
+type Person struct {
 	Name string `required max:"100"` //tags
 }
 type Doctor struct {
@@ -22,7 +24,7 @@ type Doctor struct {
 
 var i string = "31"
 
-func main() {
+func maine() {
 	a := 1
 	b := 1
 	c := 8
@@ -47,7 +49,7 @@ func main() {
 	bs := slice[3:]  // from index 3 to end copy
 	cs := slice[3:6] // from index 3 to 6 copy
 	fmt.Printf("First Slice:%v\nSecond Slice:%v\nThird Slice:%v\n", as, bs, cs)
-	
+
 	ds := make([]int, 3, 100) // makes a slice with 3 elements and 100 capacity
 	fmt.Println(ds, len(ds), cap(ds))
 	ds = append(ds, []int{1, 2, 3, 4, 5}...) // spreading works like this
@@ -56,15 +58,15 @@ func main() {
 	fmt.Println(ds, len(ds), cap(ds))
 	ds = ds[:len(ds)-1] // popping
 	fmt.Println(ds, len(ds), cap(ds))
-	ds = append(ds[:1],ds[2:]...) // removing middle element
+	ds = append(ds[:1], ds[2:]...) // removing middle element
 	fmt.Println(ds, len(ds), cap(ds))
 
-	 // Maps: Objects for go with strict types for keys and values
-	statePopulations := make(map[string]int,10)
-	statePopulations = map[string] int{
-		"California" : 343423323,
-		"Texas": 3423414214,
-		"Florida": 1321314234,
+	// Maps: Objects for go with strict types for keys and values
+	statePopulations := make(map[string]int, 10)
+	statePopulations = map[string]int{
+		"California": 343423323,
+		"Texas":      3423414214,
+		"Florida":    1321314234,
 	}
 	fmt.Println(statePopulations["Texas"])
 	statePopulations["Georgia"] = 31
@@ -73,13 +75,12 @@ func main() {
 	fmt.Println(ok)
 	fmt.Println(statePopulations)
 
-
 	// Struct
 	aDoctor := Doctor{
-		Person: Person{Name: "John Pertwee"},// embedding another struct
+		Person: Person{Name: "John Pertwee"}, // embedding another struct
 		number: 3,
 		companions: []string{
-			"Ahmet","Ayse","Mehmet",
+			"Ahmet", "Ayse", "Mehmet",
 		},
 	}
 	// getting the tag
@@ -90,9 +91,9 @@ func main() {
 	// gets the name from Person struct
 	//aDoctor.name = "Jon Pertwee"
 	fmt.Println(aDoctor)
-	
+
 	// Anonymus Struct that is scoped
-	someDoctor:= struct{name string}{name: "Mahmit"}
+	someDoctor := struct{ name string }{name: "Mahmit"}
 	fmt.Println(someDoctor)
 
 }

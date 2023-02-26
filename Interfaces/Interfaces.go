@@ -42,5 +42,3 @@ func (ic *IntCounter) Increment() int {
 	*ic++
 	return int(*ic)
 }
- 
- 

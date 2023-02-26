@@ -15,13 +15,13 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.19
 
       - name: Build
-        run: go build -v ./3x+1.go
+        run: go build -v ./3x+1/3x+1.go
 
       - name: Build-Win
-        run: GOOS=windows GOARCH=amd64 go build -v ./3x+1.go
+        run: GOOS=windows GOARCH=amd64 go build -v ./3x+1/3x+1.go
 
       - name: Test
-        run: go test -v ./3x+1.go
+        run: go test -v ./3x+1/3x+1.go
