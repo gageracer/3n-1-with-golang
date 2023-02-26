@@ -1,3 +1,3 @@
-module 3n-1
+module 3x+1
 
 go 1.19
